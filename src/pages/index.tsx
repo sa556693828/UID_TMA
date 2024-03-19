@@ -87,7 +87,7 @@ function InitData() {
 export default function Home() {
   return (
     <>
-      <MainButtonTest />
+      {/* <MainButtonTest /> */}
       <InitData />
     </>
   );
