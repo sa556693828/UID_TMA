@@ -1,12 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import type { Metadata } from "next";
-import type { PropsWithChildren } from "react";
-import { Inter } from "next/font/google";
-import "@/styles/globals.css";
 import { TmaSDKLoader } from "@/components/TmaSDKLoader";
-
-const inter = Inter({ subsets: ["latin"] });
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,9 +12,12 @@ export const metadata: Metadata = {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <TmaSDKLoader>
-        <Component {...pageProps} />
-      </TmaSDKLoader>
+      {/* TODO: 改成自己的 */}
+      <TonConnectUIProvider manifestUrl="https://ton-connect.github.io/demo-dapp-with-react-ui/tonconnect-manifest.json">
+        <TmaSDKLoader>
+          <Component {...pageProps} />
+        </TmaSDKLoader>
+      </TonConnectUIProvider>
     </>
   );
 }
