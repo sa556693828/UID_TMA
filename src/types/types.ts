@@ -16,8 +16,10 @@ export const tableMap: Record<TableName, TableName> = {
   user_in_chat: "user_in_chat",
 };
 export type UserData = {
-  user_id: number;
+  user_id: number | null;
   username: string;
+  first_name: string;
+  last_name: string;
   evm_address: string;
   google: string;
   twitter: string;
@@ -26,5 +28,14 @@ export type UserData = {
   email: string;
   score: string;
   ton_address: string;
-  inviteFrom_id: number;
+  inviteFrom_id: number | null;
+};
+export type UserTG = {
+  allowsWriteToPm: boolean;
+  firstName: string;
+  id: number | null;
+  isPremium: boolean;
+  languageCode: string;
+  lastName: string;
+  username: string;
 };

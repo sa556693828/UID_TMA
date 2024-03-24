@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import type { Metadata } from "next";
 import { TmaSDKLoader } from "@/components/TmaSDKLoader";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import Layout from "@/components/Layout/Layout";
+import { Provider } from "@/components/Provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +17,11 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* TODO: 改成自己的 */}
       <TonConnectUIProvider manifestUrl="https://ton-connect.github.io/demo-dapp-with-react-ui/tonconnect-manifest.json">
         <TmaSDKLoader>
-          <Component {...pageProps} />
+          <Provider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Provider>
         </TmaSDKLoader>
       </TonConnectUIProvider>
     </>
