@@ -104,61 +104,69 @@ export default function Test() {
             min="0"
             max="1"
             step="0.0001"
+            disabled={userData.score !== null}
             value={
               userData.score !== null ? userData.score[index] : score[index]
             }
-            className="range"
+            className={`range ${
+              userData.score !== null ? "cursor-not-allowed" : ""
+            }}`}
             onChange={(e) => handleChange(e, index)}
           />
         </div>
       ))}
+
       <div className="w-full flex gap-4 px-4 py-4">
-        <button
-          className="text-lg border w-1/2 h-10 rounded-full border-white hover:bg-white hover:text-black"
-          onClick={() => {
-            setScore(new Array(8).fill(10));
-            goPage("/test");
-          }}
-        >
-          reset
-        </button>
-        <button
-          className="text-lg border w-1/2 h-10 rounded-full border-white hover:bg-white hover:text-black"
-          onClick={() => buttonRef.current?.showModal()}
-        >
-          confirm
-        </button>
-        <dialog id="my_modal_1" className="modal" ref={buttonRef}>
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">
-              Do you want to submit the test ? You can only submit once a day.
-            </h3>
-            <div className="modal-action justify-between">
-              <form method="dialog">
-                <button className="btn w-32">Close</button>
-              </form>
-              <form method="dialog">
-                <button
-                  className="btn w-32"
-                  onClick={() => updateUserScore(score, userTG?.id as number)}
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      </div>
-      {userData.score !== null && (
-        <div className="w-full flex gap-4 px-4 pb-4">
+        {userData.score === null ? (
+          <>
+            <button
+              className="text-lg border w-1/2 h-10 rounded-full border-white hover:bg-white hover:text-black"
+              onClick={() => {
+                setScore(new Array(8).fill(0.2));
+                goPage("/test");
+              }}
+            >
+              reset
+            </button>
+            <button
+              className="text-lg border w-1/2 h-10 rounded-full border-white hover:bg-white hover:text-black"
+              onClick={() => buttonRef.current?.showModal()}
+            >
+              confirm
+            </button>
+            <dialog id="my_modal_1" className="modal" ref={buttonRef}>
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">
+                  Do you want to submit the test ? You can only submit once a
+                  day.
+                </h3>
+                <div className="modal-action justify-between">
+                  <form method="dialog">
+                    <button className="btn w-32">Close</button>
+                  </form>
+                  <form method="dialog">
+                    <button
+                      className="btn w-32"
+                      onClick={() =>
+                        updateUserScore(score, userTG?.id as number)
+                      }
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </>
+        ) : (
           <button
             className="text-lg border w-full h-12 rounded-full hover:bg-cyan-600 bg-white hover:text-white text-black"
             onClick={() => goPage("/art")}
           >
             Go to your Art
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { tableMap, UserData } from "@/types/types";
+import { UserData } from "@/types/types";
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { Context } from "@/components/Provider";
 
@@ -24,12 +24,6 @@ export default function Home() {
       </div>
       <div className="flex w-full px-4 pb-4 justify-center gap-4">
         <TonConnectButton className="w-1/2" />
-        <button
-          className="text-lg border w-1/2 rounded-full border-white h-auto"
-          onClick={() => goPage("/test")}
-        >
-          start a test
-        </button>
       </div>
       {displayOrder.map((key, index) => {
         if (key === "score" || key === "recaptcha") {
@@ -50,16 +44,23 @@ export default function Home() {
           </div>
         );
       })}
-      {userData.score !== null && (
-        <div className="w-full flex gap-4 px-4 pb-4">
+      <div className="w-full flex gap-4 px-4 pb-4">
+        {userData.score === null ? (
+          <button
+            className="text-lg border w-full h-12 rounded-full hover:border-white/20 bg-white hover:bg-transparent hover:text-white text-black"
+            onClick={() => goPage("/test")}
+          >
+            Start a test
+          </button>
+        ) : (
           <button
             className="text-lg border w-full h-12 rounded-full hover:bg-cyan-600 bg-white hover:text-white text-black"
             onClick={() => goPage("/art")}
           >
             Go to your Art
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
