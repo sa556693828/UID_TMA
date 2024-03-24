@@ -230,13 +230,11 @@ const Box = ({ userID, userScore }) => {
                         icles.colorMode(p.RGB, 255, 255, 255, 1);
                         icles.blendMode(p.BLEND);
                         icles.rectMode(p.CENTER);
-
                         ff = new Array(cols * rows);
                     };
 
                     p.draw = () => {
                         p.background(0);
-
                         p.randomSeed(userID);
                         icles.fill(0, 0.016);
                         icles.noStroke();

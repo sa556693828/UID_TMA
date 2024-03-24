@@ -29,7 +29,9 @@ export default function Art() {
 
   return (
     <div className="relative w-full h-full">
-      <Box userID={userData.user_id} userScore={userData.score} />
+      {userData && userData.user_id && userData.score && (
+        <Box userID={userData.user_id} userScore={userData.score} />
+      )}
     </div>
   );
 }
